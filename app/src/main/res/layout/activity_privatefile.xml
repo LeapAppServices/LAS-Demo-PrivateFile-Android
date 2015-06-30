@@ -1,0 +1,192 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/content_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#30808080"
+        android:gravity="center"
+        android:singleLine="false"
+        android:text="@string/console" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/upload_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload" />
+
+                <EditText
+                    android:id="@+id/upload_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_upload_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/download_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/download" />
+
+                <EditText
+                    android:id="@+id/download_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_download_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/create_folder_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_folder" />
+
+                <EditText
+                    android:id="@+id/create_folder_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_folder_path"
+                    android:inputType="text" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/get_meta_data_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_meta_data" />
+
+                <EditText
+                    android:id="@+id/meta_data_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_remote_path"
+                    android:inputType="text" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/delete_file_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete" />
+
+                <EditText
+                    android:id="@+id/delete_file_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_file_path"
+                    android:inputType="text" />
+
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/move_file_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/move" />
+
+                <EditText
+                    android:id="@+id/move_from_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_from_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/move_to_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_to_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/copy_file_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/copy" />
+
+                <EditText
+                    android:id="@+id/copy_from_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_from_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <TableRow>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible" />
+
+                <EditText
+                    android:id="@+id/copy_to_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_to_path"
+                    android:inputType="text" />
+            </TableRow>
+
+            <Button
+                android:id="@+id/get_usage_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/get_usage" />
+        </TableLayout>
+
+    </ScrollView>
+</LinearLayout>

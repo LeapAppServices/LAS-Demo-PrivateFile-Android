@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Private File</string>
+
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="set_password">Set Password</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="decrypt">Decrypt</string>
+    <string name="upload">Upload</string>
+    <string name="download">Download</string>
+    <string name="label_username">UserName</string>
+    <string name="hint_username">Please enter your username</string>
+    <string name="label_password">Password</string>
+    <string name="hint_password">Please enter your password</string>
+    <string name="button_login">Login</string>
+    <string name="button_register">Register</string>
+    <string name="create_folder">Create a Folder</string>
+    <string name="get_meta_data">Get Meta Data</string>
+    <string name="move">Move File</string>
+    <string name="copy">Copy</string>
+    <string name="delete">Delete File</string>
+    <string name="share">Share File</string>
+    <string name="get_usage">Get Usage</string>
+    <string name="hint_upload_path">Upload path</string>
+    <string name="hint_download_path">Download Path</string>
+    <string name="hint_folder_path">Folder Path</string>
+    <string name="hint_remote_path">Remote Path</string>
+    <string name="hint_file_path">File Path</string>
+    <string name="hint_from_path">From Path</string>
+    <string name="hint_to_path">To Path</string>
+    <string name="console">Console</string>
+</resources>
