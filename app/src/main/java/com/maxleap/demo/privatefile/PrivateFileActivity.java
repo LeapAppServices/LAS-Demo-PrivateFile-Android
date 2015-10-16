@@ -8,11 +8,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.maxleap.LASLog;
-import com.maxleap.LASPrivateFile;
-import com.maxleap.LASPrivateFileManager;
-import com.maxleap.callback.*;
-import com.maxleap.exception.LASException;
+import com.maxleap.DeleteCallback;
+import com.maxleap.DownloadCallback;
+import com.maxleap.GetMetaDataCallback;
+import com.maxleap.GetUsageCallback;
+import com.maxleap.MLLog;
+import com.maxleap.MLPrivateFile;
+import com.maxleap.MLPrivateFileManager;
+import com.maxleap.ProgressCallback;
+import com.maxleap.SaveCallback;
+import com.maxleap.exception.MLException;
 import com.maxleap.utils.FileHandle;
 import com.maxleap.utils.FileHandles;
 
@@ -110,9 +115,9 @@ public class PrivateFileActivity extends Activity {
 
     private void getUsage() {
         contentTextView.setText("statistics...");
-        LASPrivateFileManager.getUsageInBackground(new GetUsageCallback() {
+        MLPrivateFileManager.getUsageInBackground(new GetUsageCallback() {
             @Override
-            public void done(int fileNum, long fileCap, LASException exception) {
+            public void done(int fileNum, long fileCap, MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
@@ -127,11 +132,11 @@ public class PrivateFileActivity extends Activity {
         contentTextView.setText("copy...");
         String fromPath = copyFromEditText.getText().toString();
         String toPath = copyToEditText.getText().toString();
-        final LASPrivateFile src = LASPrivateFile.createFile(fromPath);
-        final LASPrivateFile target = LASPrivateFile.createFile(toPath);
-        LASPrivateFileManager.copyInBackground(src, target, false, new SaveCallback() {
+        final MLPrivateFile src = MLPrivateFile.createFile(fromPath);
+        final MLPrivateFile target = MLPrivateFile.createFile(toPath);
+        MLPrivateFileManager.copyInBackground(src, target, false, new SaveCallback() {
             @Override
-            public void done(LASException exception) {
+            public void done(MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
@@ -147,11 +152,11 @@ public class PrivateFileActivity extends Activity {
         contentTextView.setText("move...");
         String fromPath = moveFromEditText.getText().toString();
         String toPath = moveToEditText.getText().toString();
-        final LASPrivateFile src = LASPrivateFile.createFile(fromPath);
-        final LASPrivateFile target = LASPrivateFile.createFile(toPath);
-        LASPrivateFileManager.moveInBackground(src, target, false, new SaveCallback() {
+        final MLPrivateFile src = MLPrivateFile.createFile(fromPath);
+        final MLPrivateFile target = MLPrivateFile.createFile(toPath);
+        MLPrivateFileManager.moveInBackground(src, target, false, new SaveCallback() {
             @Override
-            public void done(LASException exception) {
+            public void done(MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
@@ -166,10 +171,10 @@ public class PrivateFileActivity extends Activity {
     private void deleteFile() {
         contentTextView.setText("delete...");
         String remotePath = deleteFileEditText.getText().toString();
-        final LASPrivateFile privateFile = LASPrivateFile.createFile(remotePath);
-        LASPrivateFileManager.deleteInBackground(privateFile, new DeleteCallback() {
+        final MLPrivateFile privateFile = MLPrivateFile.createFile(remotePath);
+        MLPrivateFileManager.deleteInBackground(privateFile, new DeleteCallback() {
             @Override
-            public void done(LASException exception) {
+            public void done(MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
@@ -184,10 +189,10 @@ public class PrivateFileActivity extends Activity {
     private void getMetaData() {
         contentTextView.setText("get meta data...");
         String remotePath = getMetaDataEditText.getText().toString();
-        final LASPrivateFile privateFile = LASPrivateFile.createDirectory(remotePath);
-        LASPrivateFileManager.getMetaDataInBackground(privateFile, true, new GetMetaDataCallback() {
+        final MLPrivateFile privateFile = MLPrivateFile.createDirectory(remotePath);
+        MLPrivateFileManager.getMetaDataInBackground(privateFile, true, new GetMetaDataCallback() {
             @Override
-            public void done(LASPrivateFile file, LASException exception) {
+            public void done(MLPrivateFile file, MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
@@ -196,11 +201,11 @@ public class PrivateFileActivity extends Activity {
 
                 contentTextView.setText("Get meta data successfully");
 
-                LASLog.d(TAG, "parent-->" + privateFile.toString());
+                MLLog.d(TAG, "parent-->" + privateFile.toString());
                 if (file.hasChildren()) {
-                    List<LASPrivateFile> children = file.getChildren();
-                    for (LASPrivateFile child : children) {
-                        LASLog.d(TAG, "child-->" + child.toString());
+                    List<MLPrivateFile> children = file.getChildren();
+                    for (MLPrivateFile child : children) {
+                        MLLog.d(TAG, "child-->" + child.toString());
                     }
                 }
             }
@@ -210,17 +215,17 @@ public class PrivateFileActivity extends Activity {
     private void createFolder() {
         contentTextView.setText("create directory...");
         String remotePath = createFolderEditText.getText().toString();
-        final LASPrivateFile privateFile = LASPrivateFile.createDirectory(remotePath);
-        LASPrivateFileManager.createDirectoryInBackground(privateFile, new SaveCallback() {
+        final MLPrivateFile privateFile = MLPrivateFile.createDirectory(remotePath);
+        MLPrivateFileManager.createDirectoryInBackground(privateFile, new SaveCallback() {
             @Override
-            public void done(LASException exception) {
+            public void done(MLException exception) {
                 if (exception != null) {
                     exception.printStackTrace();
                     contentTextView.setText(exception.getMessage());
                     return;
                 }
                 contentTextView.setText("Create directory successfully");
-                LASLog.d(TAG, privateFile.toString());
+                MLLog.d(TAG, privateFile.toString());
             }
         });
     }
@@ -229,11 +234,11 @@ public class PrivateFileActivity extends Activity {
         contentTextView.setText("downloading...");
         String remotePath = downloadEditText.getText().toString();
         FileHandle target = FileHandles.sdcard("test_download.txt");
-        final LASPrivateFile privateFile = LASPrivateFile.createFile(remotePath);
+        final MLPrivateFile privateFile = MLPrivateFile.createFile(remotePath);
         final ProgressDialog progressDialog = createProgressDialog();
-        LASPrivateFileManager.getDataWithPathInBackground(privateFile, target.getFile().getAbsolutePath(), new DownloadCallback() {
+        MLPrivateFileManager.getDataWithPathInBackground(privateFile, target.getFile().getAbsolutePath(), new DownloadCallback() {
             @Override
-            public void done(String path, LASException exception) {
+            public void done(String path, MLException exception) {
                 contentTextView.setText("");
                 progressDialog.dismiss();
                 if (exception != null) {
@@ -244,7 +249,7 @@ public class PrivateFileActivity extends Activity {
                 FileHandle handle = FileHandles.absolute(new File(path));
                 contentTextView.setText("Download successfully at " + handle.getFile().getAbsolutePath() + "\n" + handle.tryReadString());
 
-                LASLog.d(TAG, privateFile.toString());
+                MLLog.d(TAG, privateFile.toString());
             }
         }, new ProgressCallback() {
             @Override
@@ -264,11 +269,11 @@ public class PrivateFileActivity extends Activity {
         }
 
         String remotePath = uploadEditText.getText().toString();
-        final LASPrivateFile privateFile = LASPrivateFile.createFile(target.getFile().getAbsolutePath(), remotePath);
+        final MLPrivateFile privateFile = MLPrivateFile.createFile(target.getFile().getAbsolutePath(), remotePath);
         final ProgressDialog progressDialog = createProgressDialog();
-        LASPrivateFileManager.saveInBackground(privateFile, false, new SaveCallback() {
+        MLPrivateFileManager.saveInBackground(privateFile, false, new SaveCallback() {
             @Override
-            public void done(LASException exception) {
+            public void done(MLException exception) {
                 contentTextView.setText("");
                 progressDialog.dismiss();
                 if (exception != null) {
@@ -278,7 +283,7 @@ public class PrivateFileActivity extends Activity {
                 }
                 contentTextView.setText("Upload successfully");
 
-                LASLog.d(TAG, privateFile.toString());
+                MLLog.d(TAG, privateFile.toString());
 
             }
         }, new ProgressCallback() {
@@ -299,7 +304,7 @@ public class PrivateFileActivity extends Activity {
 
             @Override
             public void onCancel(DialogInterface dialog) {
-                LASPrivateFileManager.cancel();
+                MLPrivateFileManager.cancel();
                 dialog.cancel();
             }
         });
