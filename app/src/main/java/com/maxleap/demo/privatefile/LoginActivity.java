@@ -1,4 +1,4 @@
-package as.leap.demo.privatefile;
+package com.maxleap.demo.privatefile;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,12 +8,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import as.leap.LASLog;
-import as.leap.LASUser;
-import as.leap.LASUserManager;
-import as.leap.callback.LogInCallback;
-import as.leap.callback.SignUpCallback;
-import as.leap.exception.LASException;
+import com.maxleap.LogInCallback;
+import com.maxleap.MLLog;
+import com.maxleap.MLUser;
+import com.maxleap.MLUserManager;
+import com.maxleap.SignUpCallback;
+import com.maxleap.exception.MLException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = (EditText) findViewById(R.id.username_edit_text);
         passwordEditText = (EditText) findViewById(R.id.password_edit_text);
 
-        LASUser currentUser = LASUser.getCurrentUser();
+        MLUser currentUser = MLUser.getCurrentUser();
         if (currentUser != null) {
             startActivity(new Intent(this, PrivateFileActivity.class));
             finish();
@@ -40,18 +40,18 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-                    LASLog.t("Please enter both username and password!");
+                    MLLog.t("Please enter both username and password!");
                     return;
                 }
 
                 final ProgressDialog progressDialog = createProgressDialog();
-                LASUserManager.logInInBackground(username, password, new LogInCallback<LASUser>() {
+                MLUserManager.logInInBackground(username, password, new LogInCallback<MLUser>() {
                     @Override
-                    public void done(LASUser user, LASException exception) {
+                    public void done(MLUser user, MLException exception) {
                         progressDialog.dismiss();
                         if (exception != null) {
                             exception.printStackTrace();
-                            LASLog.t(exception.getMessage());
+                            MLLog.t(exception.getMessage());
                             return;
                         }
                         startActivity(new Intent(LoginActivity.this, PrivateFileActivity.class));
@@ -67,20 +67,20 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-                    LASLog.t("Please enter both username and password!");
+                    MLLog.t("Please enter both username and password!");
                     return;
                 }
-                LASUser user = new LASUser();
+                MLUser user = new MLUser();
                 user.setUserName(username);
                 user.setPassword(password);
                 final ProgressDialog progressDialog = createProgressDialog();
-                LASUserManager.signUpInBackground(user, new SignUpCallback() {
+                MLUserManager.signUpInBackground(user, new SignUpCallback() {
                     @Override
-                    public void done(LASException exception) {
+                    public void done(MLException exception) {
                         progressDialog.dismiss();
                         if (exception != null) {
                             exception.printStackTrace();
-                            LASLog.t(exception.getMessage());
+                            MLLog.t(exception.getMessage());
                             return;
                         }
                         startActivity(new Intent(LoginActivity.this, PrivateFileActivity.class));

@@ -1,4 +1,4 @@
-package as.leap.demo.privatefile;
+package com.maxleap.demo.privatefile;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

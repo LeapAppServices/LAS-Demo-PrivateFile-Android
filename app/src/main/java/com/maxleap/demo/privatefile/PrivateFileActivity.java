@@ -1,4 +1,4 @@
-package as.leap.demo.privatefile;
+package com.maxleap.demo.privatefile;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import as.leap.LASLog;
-import as.leap.LASPrivateFile;
-import as.leap.LASPrivateFileManager;
-import as.leap.callback.*;
-import as.leap.exception.LASException;
-import as.leap.utils.FileHandle;
-import as.leap.utils.FileHandles;
+import com.maxleap.LASLog;
+import com.maxleap.LASPrivateFile;
+import com.maxleap.LASPrivateFileManager;
+import com.maxleap.callback.*;
+import com.maxleap.exception.LASException;
+import com.maxleap.utils.FileHandle;
+import com.maxleap.utils.FileHandles;
 
 import java.io.File;
 import java.util.List;

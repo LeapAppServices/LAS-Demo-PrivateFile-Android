@@ -1,8 +1,8 @@
-# LAS-Demo-PrivateFile-Android
+# MaxLeap-Demo-PrivateFile-Android
 
 ## Overview
 
-PrivateFile is a sample of LAS SDK, and it relies on the basic module of LAS. This app shows the Private Files operation based on LAS SDK.
+PrivateFile is a sample of MaxLeap SDK, and it relies on the basic module of MaxLeap. This app shows the Private Files operation based on MaxLeap SDK.
 
 ## Effect
 

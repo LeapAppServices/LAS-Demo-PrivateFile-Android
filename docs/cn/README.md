@@ -1,8 +1,8 @@
-# LAS-Demo-PrivateFile-Android
+# MaxLeap-Demo-PrivateFile-Android
 
 ## 简介
 
-PrivateFile 是 LAS SDK 的一个 Sample，该项目依赖于 LAS 的基础模块。通过该应用你可以学习和了解基于 LAS SDK 的隐私文件的相关操作。
+PrivateFile 是 MaxLeap SDK 的一个 Sample，该项目依赖于 MaxLeap 的基础模块。通过该应用你可以学习和了解基于 MaxLeap SDK 的隐私文件的相关操作。
 
 ## 效果
 
